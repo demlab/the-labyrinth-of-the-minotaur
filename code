@@ -1,0 +1,65 @@
+import java.util.Scanner;
+public class Game {
+
+    public static void main(String[] args) {
+        String arr[] = new String[11];
+         arr[0] = "Мрачное подземелье ";
+         arr[1] = "Голая кирпичная стена";
+         arr[2] = "Обычная комната четыре метра на четыре";
+         arr[3] = "Эта комната больше чем обычно, но похоже в ней ничего нет";
+         arr[4] = "Длинный коридор в конце которого виднеются двери";
+         arr[5] = "Похоже комната стражи, несколько коек и разбитый котел в углу";
+         arr[6] = "Обычная комната, голые стены и камень под ногами";
+         arr[7] = "Видимо это бывшая оружейная комната";
+         arr[8] = "Здесь все давно проржавело и покрыто пылью";
+         arr[9] = "Похоже здесь что-то хранили, деревянные полки, мешки";
+         arr[10]= "Четыре стены, сухой воздух, ничего особенного";
+
+        String[] roomDescr = {"В комнате ничего нет", "Вы нашли зелье здоровья", "Вы встретили монстра"};
+        int[] roomModificator = {0, 2, -2};
+        int herohealth = 5;
+        int roomcounter = 0;
+
+        while (true) {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Куда вы хотите пойти? ");
+            String phrase1 = scan.nextLine();
+            System.out.println(phrase1);
+
+            if (phrase1.equals("n")) {
+                System.out.println("Вы пошли на север:");
+            } else if (phrase1.equals("e")) {
+                System.out.println("Вы пошли на восток:");
+            } else if (phrase1.equals("w")) {
+                System.out.println("Вы пошли на запад:");
+            } else if (phrase1.equals("s")) {
+                System.out.println("Вы пошли на юг:");
+            } else if (phrase1.equals("end")) {
+                System.out.println("Вы завершили игру");
+                break;
+            } else {
+                System.out.println("Такого направления нет");
+                continue;
+            }
+
+            int random = ((int)(Math.random() * (arr.length)));
+            System.out.println(arr[random]);
+
+            int randomInd = ((int)(Math.random() * roomDescr.length));
+            System.out.println(roomDescr[randomInd]);
+            herohealth += roomModificator[randomInd];
+            roomcounter++;
+
+            System.out.println("Health hero = " + herohealth);
+
+            if (herohealth <= 0) {
+                System.out.println("Вы завершили игру");
+                break;
+            }
+
+            if (roomcounter == 10) {
+                System.out.println(" Вы победили!");
+            }
+        }
+    }
+}
